@@ -1,4 +1,4 @@
-FROM sonatype/nexus3
+FROM sonatype/nexus3:3.12.0
 
 USER root
 
@@ -22,6 +22,8 @@ RUN yum -y swap -- remove fakesystemd -- install systemd systemd-libs && \
 RUN mkdir -p /opt/s3sync
 
 COPY ./docker-entrypoint.sh /entrypoint.sh
+
+WORKDIR /opt/sonatype/nexus
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bin/nexus", "run"]
